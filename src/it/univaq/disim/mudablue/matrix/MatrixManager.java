@@ -83,7 +83,6 @@ public class MatrixManager {
 			}
 		}
 		
-		System.out.println(occurrencies_list);
 		return occurrencies_list;
 	}
 
@@ -96,16 +95,16 @@ public class MatrixManager {
 		
 		ArrayList<Integer> results = new ArrayList<Integer>();
 		
-		for(int i=0; i<m.getColumnDimension(); i++)
+		for(int i=0; i<m.getRowDimension(); i++)
 		{
-			RealVector column = m.getColumnVector(i);
+			RealVector row = m.getRowVector(i);
 			
 			int counter = 0;
 			boolean remove = false;
 			
-			for(int j=0; j<column.getDimension(); j++)
+			for(int j=0; j<row.getDimension(); j++)
 			{
-				if(column.getEntry(j)!=0.0)
+				if(row.getEntry(j)!=0.0)
 				{
 					counter += 1;
 				}
@@ -117,7 +116,7 @@ public class MatrixManager {
 				//System.out.println("removeLB");
 			}
 			
-			if(counter>column.getDimension()/2) //occhio qui, fallirà sempre se gli passi meno di 4 repository
+			if(counter>row.getDimension()/2) //occhio qui, fallirà sempre se gli passi meno di 4 repository
 			{
 				remove=true;
 				//System.out.println("removeUB");
@@ -130,15 +129,13 @@ public class MatrixManager {
 			
 		}
 		
-		System.out.println("jesus "+results.size());
-		RealMatrix mFinal = MatrixUtils.createRealMatrix(m.getRowDimension(),results.size());
+		RealMatrix mFinal = MatrixUtils.createRealMatrix(results.size(),m.getColumnDimension());
 		int j=0;
-		for(int i=0; i<m.getColumnDimension(); i++)
+		for(int i=0; i<m.getRowDimension(); i++)
 		{
 			if(results.contains(i))
 			{
-				mFinal.setColumnMatrix(j, m.getColumnMatrix(results.get(j)));
-				System.out.println(m.getColumnMatrix(results.get(j)));
+				mFinal.setRowMatrix(j, m.getRowMatrix(results.get(j)));
 				j += 1;
 			}
 			

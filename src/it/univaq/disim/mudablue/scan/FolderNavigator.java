@@ -19,6 +19,9 @@ public class FolderNavigator
 		
 		ListManager manager = new ListManager();
 		
+		//System.out.println(list);
+		
+		
 	    for (File file : listOfFiles) {
 	        
 	    	if (file.isDirectory())//directory 
@@ -37,6 +40,7 @@ public class FolderNavigator
 		    	}
 	        }
 	    }
+	
 		return repository_object;
 	}
 

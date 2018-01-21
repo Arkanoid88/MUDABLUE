@@ -1,0 +1,43 @@
+package it.univaq.disim.mudablue.matrix;
+
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.eclipse.jgit.api.errors.GitAPIException;
+
+import it.univaq.disim.crossminer.mudablue.githubdownload.GitHubRepositoryManager;
+
+public class mainDownload {
+
+	public static void main(String[] args) throws IOException, GitAPIException {
+		
+		GitHubRepositoryManager git = new GitHubRepositoryManager();
+
+		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Rick\\Documents\\GitHub\\MUDABLUE\\src\\repositories.txt"));
+		
+		String line;
+		while((line = in.readLine()) != null)
+		{
+		    int startIndex = line.indexOf(".com")+5;
+		    int finalIndex = line.indexOf("/", startIndex);
+		    String User = line.substring(startIndex, finalIndex);
+		    startIndex = finalIndex+1;
+		    finalIndex = line.indexOf(".git", startIndex);
+		    String Repository = line.substring(startIndex, finalIndex);
+		    System.out.println(User+" "+Repository);
+		    try {
+		    	git.clone(User, Repository);
+		    }
+		    catch(Exception exc)
+		    {
+		    	continue;
+		    }
+		}
+		in.close();
+
+	}
+
+}

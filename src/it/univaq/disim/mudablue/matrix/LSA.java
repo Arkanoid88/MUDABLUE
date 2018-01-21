@@ -66,9 +66,6 @@ public class LSA {
 		RealMatrix U = svd.getU();
 		RealMatrix S = svd.getS();
 		RealMatrix Vt = svd.getVT();
-		System.out.println(U);
-		System.out.println(S);
-		System.out.println(Vt);
 		
 		RealMatrix Saux =  MatrixUtils.createRealMatrix(S.getRowDimension(), S.getColumnDimension());
 		RealMatrix Uaux =  MatrixUtils.createRealMatrix(U.getRowDimension(), U.getColumnDimension());

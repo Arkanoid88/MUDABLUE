@@ -12,6 +12,7 @@ public class CountOccurrencies {
 			if(elem.equals(term)){counter+=1.0;}
 		}
 		
+		//System.out.println(term);
 		return counter;
 	}
 	
