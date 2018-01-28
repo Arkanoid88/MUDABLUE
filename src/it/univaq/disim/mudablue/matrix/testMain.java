@@ -20,7 +20,7 @@ public class testMain {
 		LSA lsa = new LSA();
 		
 		
-		/*File folder_path = new File("C:/repos");
+		File folder_path = new File("C:/repos");
 		File[] listOfRepos = folder_path.listFiles();
 		
 		for(File elem:listOfRepos)
@@ -31,7 +31,7 @@ public class testMain {
 		ArrayList<ArrayList<Double>> occurrencies_list = new ArrayList<ArrayList<Double>>();
 		occurrencies_list = manager.createList(path_list);
 		
-		RealMatrix m = manager.createMatrix(occurrencies_list);*/
+		RealMatrix m = manager.createMatrix(occurrencies_list);
 		
 		
 		/*
@@ -44,9 +44,9 @@ public class testMain {
 		 */
 		
 		//debug
-		double[][] matrixData = {{1,1,0,0,0,0},{2,1,1,0,0,0},{0,1,3,0,0,0},{0,1,1,0,0,0},{0,1,0,0,0,1},{1,0,0,0,1,0},{0,0,0,2,1,1},{0,0,0,0,2,1},{0,0,0,1,0,0},{1,0,0,1,1,1}};
+		//double[][] matrixData = {{1,1,0,0,0,0,0},{2,1,1,0,0,0,0},{0,1,3,0,0,0,0},{0,1,1,0,0,0,0},{0,1,0,0,0,1,0},{1,0,0,0,1,0,0},{0,0,0,2,1,1,0},{0,0,0,0,2,1,0},{0,0,0,1,0,0,1},{1,0,0,1,1,1,1}};
 		//double[][] matrixData = {{1,0,0,1,0,0,0,0,0},{1,0,1,0,0,0,0,0,0},{1,1,0,0,0,0,0,0,0},{0,1,1,0,1,0,0,0,0},{0,1,1,2,0,0,0,0,0},{0,1,0,0,1,0,0,0,0},{0,1,0,0,1,0,0,0,0},{0,0,1,1,0,0,0,0,0},{0,1,0,0,0,0,0,0,1},{0,0,0,0,0,1,1,1,0},{0,0,0,0,0,0,1,1,1},{0,0,0,0,0,0,0,1,1}};
-		RealMatrix m = MatrixUtils.createRealMatrix(matrixData);
+		//RealMatrix m = MatrixUtils.createRealMatrix(matrixData);
 		
 		System.out.println("Numero di Termini: "+m.getRowDimension());
 		
@@ -56,12 +56,12 @@ public class testMain {
 
 		for(int i=0; i<m.getRowDimension(); i++)
 		{
-			System.out.println(m.getRowMatrix(i));
+			//System.out.println(m.getRowMatrix(i));
 		}
 		
 		m = lsa.algorithm(m);
 		
-		System.out.println(m);
+		//System.out.println(m);
 		
 		/*
 		 * Similarità
