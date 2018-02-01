@@ -39,10 +39,10 @@ public class ListManager {
 	public ArrayList<String> merge(ArrayList<String> target_list, CompilationUnit cu){
 		
 		Parser parser = new Parser();
-		/*for(List<String> elem : parser.GetVariables(cu))
+		for(List<String> elem : parser.GetVariables(cu))
 		{
 			target_list.add(elem.get(1));
-		}*/
+		}
 		for(String elem : parser.GetPackages(cu))
 		{
 			target_list.add(elem);
