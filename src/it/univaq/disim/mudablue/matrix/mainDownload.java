@@ -2,13 +2,16 @@ package it.univaq.disim.mudablue.matrix;
 
 import java.io.BufferedReader;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.eclipse.jgit.api.errors.GitAPIException;
 
 import it.univaq.disim.crossminer.mudablue.githubdownload.GitHubRepositoryManager;
+import it.univaq.disim.mudablue.scan.ListManager;
 
 public class mainDownload {
 
@@ -19,8 +22,33 @@ public class mainDownload {
 		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Rick\\Documents\\GitHub\\MUDABLUE\\src\\repositories.txt"));
 		
 		String line;
-		while((line = in.readLine()) != null)
+		
+		/*
+		 * aggiunto codice per verificare se le repository da scaricare sono già presenti nella directory 
+		 */
+		
+		File folder_path = new File("C:/repos");
+		File[] listOfFiles = folder_path .listFiles();
+		ArrayList<String> files = new ArrayList<String>();
+		
+		for(File elem:listOfFiles)
 		{
+			File[] listOfInnerFiles = elem.listFiles();
+			for(File innerelem:listOfInnerFiles)
+			{
+				int index = innerelem.toString().indexOf("/");
+				String string = innerelem.toString().substring(index+10);
+				files.add(string);
+			}
+			
+		}
+		
+		ListManager manager = new ListManager();
+		
+		
+	
+		while((line = in.readLine()) != null)
+		{       
 		    int startIndex = line.indexOf(".com")+5;
 		    int finalIndex = line.indexOf("/", startIndex);
 		    String User = line.substring(startIndex, finalIndex);
@@ -29,13 +57,21 @@ public class mainDownload {
 		    String Repository = line.substring(startIndex, finalIndex);
 		    System.out.println(User+" "+Repository);
 		    try {
-		    	git.clone(User, Repository);
+		    	if(files.contains(User+"\\"+Repository))
+		    	{
+		    		System.out.println("già scaricato");
+		    	}
+		    	else
+		    	{
+		    		//git.clone(User, Repository);
+		    	}
 		    }
 		    catch(Exception exc)
 		    {
 		    	continue;
-		    }
+				    }
 		}
+
 		in.close();
 
 	}

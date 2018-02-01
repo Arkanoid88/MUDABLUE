@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -13,6 +14,8 @@ import org.apache.commons.math3.linear.RealMatrix;
 public class testMain {
 
 	public static void main(String[] args) throws IOException {
+
+		long startTime = System.currentTimeMillis(); //elapsed time
 		
 		ArrayList<String> path_list = new ArrayList<String>();
 		
@@ -76,10 +79,18 @@ public class testMain {
 		FileWriter fileWriter = new FileWriter(file);
 		for(int i=0; i<m.getRowDimension(); i++)
 		{
-			fileWriter.write(m.getRowMatrix(i).toString()+"\n");
+			fileWriter.write(path_list.get(i)+" "+m.getRowMatrix(i).toString()+"\n");
 		}
 		fileWriter.flush();
 		fileWriter.close();
+		
+		long estimatedTime = System.currentTimeMillis() - startTime;
+
+		System.out.println(		String.format("%d min, %d sec", 
+			    TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
+			    TimeUnit.MILLISECONDS.toSeconds(estimatedTime) - 
+			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(estimatedTime))
+			));
 		
 	}
 

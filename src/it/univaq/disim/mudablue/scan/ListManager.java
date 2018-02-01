@@ -51,10 +51,10 @@ public class ListManager {
 		{
 			target_list.add(elem);
 		}
-		/*for(String elem : parser.GetFieldsVariables(cu))
+		for(String elem : parser.GetFieldsVariables(cu))
 		{
 			target_list.add(elem);
-		}*/
+		}
 
 		return target_list;
 	}
