@@ -83,7 +83,8 @@ public class LSA {
 		mFinal.setRowMatrix(1, Uaux.multiply(Saux.multiply(Vtaux)).getRowMatrix(1));
 		
 		
-		for(int i=2; i<m.getRowDimension(); i = i+1)
+		//for(int i=2; i<m.getRowDimension(); i = i+1)
+		for(int i=2; i<=50; i = i+1) //testare con i = 300
 		{
 				
 				if(i<Uaux.getRowDimension())
@@ -95,6 +96,12 @@ public class LSA {
 				{
 					Vtaux.setRowMatrix(i, Vt.getRowMatrix(i));
 				}
+				
+				if(i<Saux.getRowDimension())
+				{
+					Saux.setRowMatrix(i, S.getRowMatrix(i));
+				}
+				
 				
 				mFinal.setRowMatrix(i, Uaux.multiply(Saux.multiply(Vtaux)).getRowMatrix(i));	
 		}

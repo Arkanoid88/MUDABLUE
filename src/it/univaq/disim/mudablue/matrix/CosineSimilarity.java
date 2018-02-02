@@ -47,26 +47,6 @@ public class CosineSimilarity {
 		return result;
 	}
 	
-	/*public RealMatrix CS(RealMatrix m)
-	{
-		/*
-		 * creation of the similarity matrix
-		 */
-		/*
-		RealMatrix mFinal = MatrixUtils.createRealMatrix(m.getRowDimension(), m.getRowDimension());
-		
-		for(int i=0;i<mFinal.getColumnDimension(); i++)
-		{
-			for(int j=0; j<mFinal.getRowDimension(); j++)
-			{
-				double simil = Similarity(m.getRowVector(i),m.getRowVector(j));
-				mFinal.setEntry(i, j, simil);
-			}
-		}
-		
-		return mFinal;
-	}*/
-	
 	public RealMatrix CS(RealMatrix m)
 	{
 		/*
