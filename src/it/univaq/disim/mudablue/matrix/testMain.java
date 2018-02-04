@@ -84,6 +84,8 @@ public class testMain {
 		fileWriter.flush();
 		fileWriter.close();
 		
+		DataRefinement dr = new DataRefinement();
+		dr.refine(m);		
 		long estimatedTime = System.currentTimeMillis() - startTime;
 
 		System.out.println(		String.format("%d min, %d sec", 
