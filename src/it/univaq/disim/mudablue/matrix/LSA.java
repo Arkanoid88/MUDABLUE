@@ -21,30 +21,19 @@ public class LSA {
 		RealMatrix Uaux =  MatrixUtils.createRealMatrix(U.getRowDimension(), U.getColumnDimension());
 		RealMatrix Vtaux =  MatrixUtils.createRealMatrix(Vt.getRowDimension(), Vt.getColumnDimension());
 		
-		/*Saux.setRowMatrix(0, S.getRowMatrix(0));
-		Saux.setRowMatrix(1, S.getRowMatrix(1));
 		
-		Uaux.setRowMatrix(0, U.getRowMatrix(0));
-		Vtaux.setRowMatrix(0, Vt.getRowMatrix(0));
-		Uaux.setRowMatrix(1, U.getRowMatrix(1));
-		Vtaux.setRowMatrix(1, Vt.getRowMatrix(1));
-		
-		mFinal.setRowMatrix(0, Uaux.multiply(Saux.multiply(Vtaux)).getRowMatrix(0));
-		mFinal.setRowMatrix(1, Uaux.multiply(Saux.multiply(Vtaux)).getRowMatrix(1));*/
-		
-		
-		//for(int i=2; i<m.getRowDimension(); i = i+1)
-		
-		int value=300;
-		if(m.getRowDimension()<value)
+		int value=m.getColumnDimension()/2;
+		//int value = 300;
+		System.out.println(value);
+		if(m.getColumnDimension()<value)
 		{
-			value = m.getRowDimension();
+			value = m.getColumnDimension();
 		}
 		
 		for(int i=0; i<=value; i = i+1)
 		{
 				
-				if(i<Uaux.getColumnDimension())
+				/*if(i<Uaux.getColumnDimension())
 				{
 					Uaux.setColumnMatrix(i, U.getColumnMatrix(i));
 				}
@@ -52,7 +41,7 @@ public class LSA {
 				if(i<Vtaux.getRowDimension())
 				{
 					Vtaux.setRowMatrix(i, Vt.getRowMatrix(i));
-				}
+				}*/
 				
 				if(i<Saux.getRowDimension())
 				{
@@ -60,7 +49,7 @@ public class LSA {
 				}
 		}
 		
-		mFinal = Uaux.multiply(Saux.multiply(Vtaux));
+		mFinal = U.multiply(Saux.multiply(Vt));
 		
 
 		return mFinal;
