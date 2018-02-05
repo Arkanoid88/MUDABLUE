@@ -18,7 +18,7 @@ public class MatrixManager {
 	{
 		/*
 		 * conversione nei formati real matrix
-		 * dovremmo cercare un sistema più efficiente
+		 * dovremmo cercare un sistema piÃ¹ efficiente
 		 */
 		RealMatrix m = MatrixUtils.createRealMatrix(occurrencies_list.get(0).size(),occurrencies_list.size());
 
@@ -51,17 +51,17 @@ public class MatrixManager {
 			File file = new File(repo);
 			
 	        
-	        FolderNavigator magellano = new FolderNavigator();
+	        FolderNavigator navigator = new FolderNavigator();
 			ArrayList<String> terms= new ArrayList<String>();
-	        // questione terms
-	        repository_object = magellano.Files_List(file, repository_object.getMain_list(), terms, repository_object);
+	        
+	        repository_object = navigator.Files_List(file, repository_object.getMain_list(), terms, repository_object);
 	        
 	        occurrencies_list.add(row.create_row(repository_object));
 		}
 		
 		/* normalizzazione delle liste, per ogni lista
-		 * più corta della più lunga, si aggiungono tanti 0
-		 * quant'è la differenza di lunghezza in modo da avere
+		 * piÃ¹ corta della piÃ¹ lunga, si aggiungono tanti 0
+		 * quant'Ã¨ la differenza di lunghezza in modo da avere
 		 * una matrice quadrata alla fine
 		 * */
 		
@@ -90,7 +90,7 @@ public class MatrixManager {
 		
 		/*
 		 * prendiamo la matrice realmatrix termini-documenti ed eliminiamo alcune colonne secondo questo principio:
-		 * se un termine appare in una sola repository lo eliminiamo oppure se appare in più della metà delle repository
+		 * se un termine appare in una sola repository lo eliminiamo oppure se appare in piÃ¹ della metÃ  delle repository
 		 */
 		
 		ArrayList<Integer> results = new ArrayList<Integer>();
@@ -116,7 +116,7 @@ public class MatrixManager {
 				//System.out.println("removeLB");
 			}
 			
-			if(counter>row.getDimension()/2) //occhio qui, fallirà sempre se gli passi meno di 4 repository
+			if(counter>row.getDimension()/2) //occhio qui, fallirÃ  sempre se gli passi meno di 4 repository
 			{
 				remove=true;
 				//System.out.println("removeUB");
