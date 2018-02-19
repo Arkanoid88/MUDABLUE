@@ -28,7 +28,7 @@ public class mainDownload {
 		 */
 		
 		File folder_path = new File("C:/repos");
-		File[] listOfFiles = folder_path .listFiles();
+		File[] listOfFiles = folder_path.listFiles();
 		ArrayList<String> files = new ArrayList<String>();
 		
 		for(File elem:listOfFiles)
@@ -63,7 +63,7 @@ public class mainDownload {
 		    	}
 		    	else
 		    	{
-		    		//git.clone(User, Repository);
+		    		git.clone(User, Repository);
 		    	}
 		    }
 		    catch(Exception exc)

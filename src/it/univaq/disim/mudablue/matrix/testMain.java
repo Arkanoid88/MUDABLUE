@@ -1,11 +1,13 @@
 package it.univaq.disim.mudablue.matrix;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.math3.linear.MatrixUtils;
@@ -31,8 +33,12 @@ public class testMain {
 			path_list.add(elem.toString());
 		}
 		
+		
 		ArrayList<ArrayList<Double>> occurrencies_list = new ArrayList<ArrayList<Double>>();
-		occurrencies_list = manager.createList(path_list);
+		
+		occurrencies_list = manager.createFiles(path_list);
+		
+		
 		
 		RealMatrix m = manager.createMatrix(occurrencies_list);
 		

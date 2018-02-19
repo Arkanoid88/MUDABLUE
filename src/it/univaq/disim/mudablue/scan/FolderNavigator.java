@@ -2,6 +2,7 @@ package it.univaq.disim.mudablue.scan;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.apache.commons.io.FilenameUtils;
@@ -16,11 +17,7 @@ public class FolderNavigator
 	public Repositories Files_List(File folder_path, ArrayList<String> main_list, ArrayList<String> raw_main_list, Repositories repository_object) throws FileNotFoundException
 	{
 		File[] listOfFiles = folder_path.listFiles();
-		
 		ListManager manager = new ListManager();
-		
-		//System.out.println(list);
-		
 		
 	    for (File file : listOfFiles) {
 	        
@@ -40,7 +37,6 @@ public class FolderNavigator
 		    	}
 	        }
 	    }
-	
 		return repository_object;
 	}
 

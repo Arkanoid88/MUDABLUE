@@ -2,7 +2,9 @@ package it.univaq.disim.mudablue.matrix;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.MatrixUtils;
@@ -16,16 +18,27 @@ public class MatrixManager {
 
 	public RealMatrix createMatrix (ArrayList<ArrayList<Double>> occurrencies_list)
 	{
+		int max = 0;
+		for(ArrayList elem : occurrencies_list)
+		{
+			if(max <= elem.size())
+			{
+				max = elem.size();
+			}
+			
+		}
 		/*
 		 * conversione nei formati real matrix
-		 * dovremmo cercare un sistema più efficiente
 		 */
-		RealMatrix m = MatrixUtils.createRealMatrix(occurrencies_list.get(0).size(),occurrencies_list.size());
+		
+		//RealMatrix m = MatrixUtils.createRealMatrix(occurrencies_list.get(occurrencies_list.size()).size(),occurrencies_list.size());
+		RealMatrix m = MatrixUtils.createRealMatrix(max,occurrencies_list.size());
 
 		int rowCounter=0;
 		for(ArrayList elem : occurrencies_list)
 		{
-			RealVector vector = new ArrayRealVector(elem.size());
+			//RealVector vector = new ArrayRealVector(elem.size());
+			RealVector vector = new ArrayRealVector(max);
 			for(int i=0; i<elem.size();i++)
 			{
 				vector.setEntry(i, (double) elem.get(i));
@@ -37,53 +50,86 @@ public class MatrixManager {
 		return m;
 	}
 	
-	public ArrayList<ArrayList<Double>> createList(ArrayList<String> path_list) throws FileNotFoundException
+	public ArrayList<ArrayList<Double>> createFiles(ArrayList<String> path_list) throws FileNotFoundException
 	{
 		Row row = new Row();
 		Repositories repository_object = new Repositories();
-		
-		
-		ArrayList<ArrayList<Double>> occurrencies_list = new ArrayList<ArrayList<Double>>();
-		
+		repository_object.setMain_list(repository_object.resumeMainList());
+
 		for(String repo : path_list)
-		{
+		{		
+			int index = repo.indexOf("\\", 8);
+			String repoName = repo.substring(index+1);;
+			
+			File folder_path = new File("results/");
+			File[] listOfFiles = folder_path.listFiles();
+			
+			ArrayList<String> files = new ArrayList<String>();
+			for(File elem:listOfFiles)
+			{
+				int indexx = elem.toString().indexOf("/");
+				String string = elem.toString().substring(indexx+9);
+				files.add(string);
+			}
+			
+			/*
+			 * controllo per verificare se ho gi� analizzato quella repository
+			 */
+			if(files.contains(repoName+".txt")) {
+				System.out.println("gi� analizzato");
+				continue;
+			}
+			
+			else {
 			
 			File file = new File(repo);
-			
-	        
+			 
 	        FolderNavigator navigator = new FolderNavigator();
 			ArrayList<String> terms= new ArrayList<String>();
 	        
 	        repository_object = navigator.Files_List(file, repository_object.getMain_list(), terms, repository_object);
+			repository_object.saveMainList(repository_object.getMain_list());
 	        
-	        occurrencies_list.add(row.create_row(repository_object));
-		}
-		
-		/* normalizzazione delle liste, per ogni lista
-		 * più corta della più lunga, si aggiungono tanti 0
-		 * quant'è la differenza di lunghezza in modo da avere
-		 * una matrice quadrata alla fine
-		 * */
-		
-		int max = 0;
-		for(ArrayList elem : occurrencies_list)
-		{
-			if(max <= elem.size())
-			{
-				max = elem.size();
-			}
+	        PrintStream ps = new PrintStream(new File("results/"+repoName+".txt"));
+	        row.create_row(repository_object,ps);
 			
+			ps.close();
+			}
 		}
-				
-		for(ArrayList elem : occurrencies_list)
+		
+	    Scanner scan;
+	    
+		File folder_path = new File("results/");
+		File[] listOfFiles = folder_path.listFiles();
+		ArrayList<ArrayList<Double>> occurrencies_list = new ArrayList<ArrayList<Double>>();
+		
+		for(File elem:listOfFiles)
 		{
-			for(int i=elem.size(); i<max;i++)
+			if(elem.toString().indexOf("mainList.txt")==-1)
 			{
-				elem.add(0.0);
+				//System.out.println(elem.toString());
+			ArrayList<Double> ol = new ArrayList<Double>();
+		    try {
+		        scan = new Scanner(elem);
+		        while(scan.hasNext())
+		        {
+		        	double var = Double.parseDouble(scan.next());
+		            ol.add(var);
+		        }
+	
+		    } catch (FileNotFoundException e1) {
+		            e1.printStackTrace();
+		    }
+		    occurrencies_list.add(ol);
+			}
+			else
+			{
+				continue;
 			}
 		}
 		
 		return occurrencies_list;
+
 	}
 
 	public RealMatrix cleanMatrix(RealMatrix m){
