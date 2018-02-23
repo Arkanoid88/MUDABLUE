@@ -12,12 +12,12 @@ public class Repositories {
 	private String repoName;
 	private ArrayList<String> mainList = resumeMainList();
 	private ArrayList<String> terms = new ArrayList<String>();
-	private ArrayList<ArrayList<Double>> occurrencies_list = new ArrayList<ArrayList<Double>>();
+	private ArrayList<ArrayList<Double>> occurrenciesList = new ArrayList<ArrayList<Double>>();
 	
-	public String getRepo_name() {
+	public String getRepoName() {
 		return repoName;
 	}
-	public void setRepo_name(String repo_name) {
+	public void setRepoName(String repo_name) {
 		this.repoName = repo_name;
 	}
 	public ArrayList<String> getTerms() {
@@ -26,23 +26,23 @@ public class Repositories {
 	public void setTerms(ArrayList<String> terms) {
 		this.terms = terms;
 	}
-	public ArrayList<String> getMain_list() {
+	public ArrayList<String> getMainList() {
 		return mainList;
 	}
-	public void setMain_list(ArrayList<String> main_list) {
-		this.mainList = main_list;
+	public void setMainList(ArrayList<String> mainList) {
+		this.mainList = mainList;
 	}
-	public ArrayList<ArrayList<Double>> getOccurrencies_list() {
-		return occurrencies_list;
+	public ArrayList<ArrayList<Double>> getOccurrenciesList() {
+		return occurrenciesList;
 	}
-	public void setOccurrencies_list(ArrayList<ArrayList<Double>> occurrencies_list) {
-		this.occurrencies_list = occurrencies_list;
+	public void setOccurrenciesList(ArrayList<ArrayList<Double>> occurrenciesList) {
+		this.occurrenciesList = occurrenciesList;
 	}
 	
 	public ArrayList<String> resumeMainList()
 	{
-		File folder_path = new File("results/");
-		File[] listOfFiles = folder_path.listFiles();
+		File folderPath = new File("results/");
+		File[] listOfFiles = folderPath.listFiles();
 		
 		ArrayList<String> files = new ArrayList<String>();
 		for(File elem:listOfFiles)
@@ -54,7 +54,7 @@ public class Repositories {
 		
 		if(files.contains("mainList.txt"))
 		{
-			File mainListFile = new File(folder_path+"/mainList.txt");
+			File mainListFile = new File(folderPath+"/mainList.txt");
 		    Scanner scan;
 		    ArrayList<String> mainList = new ArrayList<String>();
 		    

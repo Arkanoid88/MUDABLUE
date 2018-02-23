@@ -12,7 +12,7 @@ import com.github.javaparser.ast.CompilationUnit;
 
 public class ListManager {
 	
-	public ArrayList<String> create_local_list(File file) throws FileNotFoundException{
+	public ArrayList<String> createLocalList(File file) throws FileNotFoundException{
 		// preso un file, torna la lista dei termini di quel file
 		
 		InputStream inputStream = new FileInputStream(file);
@@ -20,71 +20,71 @@ public class ListManager {
 		try
 		{
 			CompilationUnit cu = JavaParser.parse(inputStream);
-			ArrayList<String> small_list = new ArrayList<String>();
+			ArrayList<String> smallList = new ArrayList<String>();
 			
-			small_list = merge(small_list,cu);
-			return small_list;
+			smallList = merge(smallList,cu);
+			return smallList;
 		}
     	catch(Exception exc)
     	{
-    		ArrayList<String> small_list = new ArrayList<String>();
-    		small_list.add("");
-    		return small_list;
+    		ArrayList<String> smallList = new ArrayList<String>();
+    		smallList.add("");
+    		return smallList;
     	}	
 		
 
 		
 	}
 	
-	public ArrayList<String> merge(ArrayList<String> target_list, CompilationUnit cu){
+	public ArrayList<String> merge(ArrayList<String> targetList, CompilationUnit cu){
 		
 		Parser parser = new Parser();
 		for(List<String> elem : parser.GetVariables(cu))
 		{
-			target_list.add(elem.get(1));
+			targetList.add(elem.get(1));
 		}
 		for(String elem : parser.GetPackages(cu))
 		{
-			target_list.add(elem);
+			targetList.add(elem);
 		}
 		for(String elem : parser.GetMethods(cu))
 		{
-			target_list.add(elem);
+			targetList.add(elem);
 		}
 		for(String elem : parser.GetFieldsVariables(cu))
 		{
-			target_list.add(elem);
+			targetList.add(elem);
 		}
 
-		return target_list;
+		return targetList;
 	}
 	
-	public ArrayList<String> create_main_list(ArrayList<String> main_list, ArrayList<String> local_list){	
+	public ArrayList<String> createMainList(ArrayList<String> mainList, ArrayList<String> localList){	
 		//data una lista locale e quella principale, mette tutti gli elementi nella lista principale
 		
-		for(String elem : local_list)
+		for(String elem : localList)
 		{
-			if(main_list.contains(elem)!=true)
+			if(mainList.contains(elem)!=true)
 			{
-				main_list.add(elem);
+				mainList.add(elem);
 			}
 		}
 		
 		//main_list.sort(null);
 
-		return main_list;
+		return mainList;
 	}
 	
-	public ArrayList<String> create_raw_main_list(ArrayList<String> raw_main_list, ArrayList<String> local_list){	
+	public ArrayList<String> createRawMainList(ArrayList<String> rawMainList, ArrayList<String> localList){	
 		//data una lista locale e quella principale, mette tutti gli elementi nella lista principale
 		
-		for(String elem : local_list)
+		for(String elem : localList)
 		{
-			raw_main_list.add(elem);
+			rawMainList.add(elem);
 		}
 		
 		//raw_main_list.sort(null);
 		
-		return raw_main_list;
+		return rawMainList;
 	}
 }

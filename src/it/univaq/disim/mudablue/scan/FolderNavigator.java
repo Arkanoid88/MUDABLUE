@@ -14,16 +14,16 @@ import it.univaq.disim.mudablue.models.Repositories;
 public class FolderNavigator 
 {
 	//funzione ricorsiva che data una directory, naviga tutti i file di tutte le sotto-directory
-	public Repositories Files_List(File folder_path, ArrayList<String> main_list, ArrayList<String> raw_main_list, Repositories repository_object) throws FileNotFoundException
+	public Repositories Files_List(File folderPath, ArrayList<String> mainList, ArrayList<String> rawMainList, Repositories repositoryObject) throws FileNotFoundException
 	{
-		File[] listOfFiles = folder_path.listFiles();
+		File[] listOfFiles = folderPath.listFiles();
 		ListManager manager = new ListManager();
 		
 	    for (File file : listOfFiles) {
 	        
 	    	if (file.isDirectory())//directory 
 	        {
-	            Files_List(file,main_list,raw_main_list,repository_object); // Calls same method again.
+	            Files_List(file,mainList,rawMainList,repositoryObject); // Calls same method again.
 	        } 
 	    	
 	        else //file 
@@ -31,13 +31,13 @@ public class FolderNavigator
 		    	String ext = FilenameUtils.getExtension(file.getName());
 		    	if (ext.equals("java"))
 		    	{	
-		    		manager.create_main_list(main_list, manager.create_local_list(file));
-		    		repository_object.setMain_list(main_list);
-		    		repository_object.setTerms(manager.create_raw_main_list(raw_main_list, manager.create_local_list(file)));
+		    		manager.createMainList(mainList, manager.createLocalList(file));
+		    		repositoryObject.setMainList(mainList);
+		    		repositoryObject.setTerms(manager.createRawMainList(rawMainList, manager.createLocalList(file)));
 		    	}
 	        }
 	    }
-		return repository_object;
+		return repositoryObject;
 	}
 
 }
