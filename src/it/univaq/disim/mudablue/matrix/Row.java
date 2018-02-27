@@ -7,17 +7,17 @@ import it.univaq.disim.mudablue.models.Repositories;
 
 public class Row {
 	
-	public ArrayList<Double> create_row(Repositories repository_object, PrintStream ps)
+	public ArrayList<Double> create_row(Repositories repositoryObject, PrintStream ps)
 	{
-		ArrayList<Double> occurrencies_list = new ArrayList<Double>();
+		ArrayList<Double> occurrenciesList = new ArrayList<Double>();
 		CountOccurrencies counter = new CountOccurrencies();
 	
-		for(String elem :repository_object.getMain_list())
+		for(String elem :repositoryObject.getMainList())
 		{
-			occurrencies_list.add(counter.Count(repository_object.getTerms(), elem, ps));
+			occurrenciesList.add(counter.Count(repositoryObject.getTerms(), elem, ps));
 		}
 		
-		return occurrencies_list;
+		return occurrenciesList;
 	}
 
 }

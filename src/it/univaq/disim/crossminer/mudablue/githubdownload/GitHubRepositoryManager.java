@@ -19,7 +19,7 @@ public class GitHubRepositoryManager {
 		
 		System.out.println("start");
 		Git.cloneRepository()
-			  .setCredentialsProvider(new UsernamePasswordCredentialsProvider("Arkanoid88","M3t4l1nv4d3r!?"))
+			  .setCredentialsProvider(new UsernamePasswordCredentialsProvider("Arkanoid88","tfhn63uinide!?"))
 			  .setURI(baseUrl + owner + "/" + repoName)
 			  .setDirectory(new File(path) )
 			  .call();

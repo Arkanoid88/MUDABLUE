@@ -62,15 +62,13 @@ public class testMain {
 		m = manager.cleanMatrix(m);
 
 		System.out.println("Numero di Termini dopo pulizia: "+m.getRowDimension());
-
+		
+		m = lsa.algorithm(m);
+		
 		for(int i=0; i<m.getRowDimension(); i++)
 		{
 			//System.out.println(m.getRowMatrix(i));
 		}
-		
-		m = lsa.algorithm(m);
-		
-		//System.out.println(m);
 		
 		/*
 		 * Similarità

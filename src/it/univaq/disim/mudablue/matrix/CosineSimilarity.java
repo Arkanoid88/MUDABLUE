@@ -9,7 +9,7 @@ public class CosineSimilarity {
 	
 	public double sum(RealVector vect1, RealVector vect2)
 	{
-		double result = 0;
+		double result = 0.0;
 		
 		for(int i=0; i<vect1.getDimension(); i++)
 		{
@@ -21,7 +21,7 @@ public class CosineSimilarity {
 	
 	public double sumPower(RealVector vect)
 	{
-		double result = 0;
+		double result = 0.0;
 		
 		for(int i=0; i<vect.getDimension(); i++)
 		{
@@ -44,7 +44,12 @@ public class CosineSimilarity {
 		
 		double result = (num)/(Math.sqrt(sumApower)*Math.sqrt(sumBpower));
 		
+		if(Double.isNaN(result))
+		{return 0.0;}
+		if(Double.isInfinite(result))
+		{return 0.0;}
 		return result;
+		
 	}
 	
 	public RealMatrix CS(RealMatrix m)

@@ -22,8 +22,8 @@ public class LSA {
 		RealMatrix Vtaux =  MatrixUtils.createRealMatrix(Vt.getRowDimension(), Vt.getColumnDimension());
 		
 		
-		//int value=m.getColumnDimension()/2;
-		int value = 300;
+		int value=m.getColumnDimension()/2;
+		//int value = 300;
 		System.out.println(value);
 		if(m.getColumnDimension()<value)
 		{

@@ -54,7 +54,7 @@ public class MatrixManager {
 	{
 		Row row = new Row();
 		Repositories repository_object = new Repositories();
-		repository_object.setMain_list(repository_object.resumeMainList());
+		repository_object.setMainList(repository_object.resumeMainList());
 
 		for(String repo : path_list)
 		{		
@@ -76,7 +76,7 @@ public class MatrixManager {
 			 * controllo per verificare se ho già analizzato quella repository
 			 */
 			if(files.contains(repoName+".txt")) {
-				System.out.println("già analizzato");
+				//System.out.println("già analizzato");
 				continue;
 			}
 			
@@ -87,8 +87,8 @@ public class MatrixManager {
 	        FolderNavigator navigator = new FolderNavigator();
 			ArrayList<String> terms= new ArrayList<String>();
 	        
-	        repository_object = navigator.Files_List(file, repository_object.getMain_list(), terms, repository_object);
-			repository_object.saveMainList(repository_object.getMain_list());
+	        repository_object = navigator.Files_List(file, repository_object.getMainList(), terms, repository_object);
+			repository_object.saveMainList(repository_object.getMainList());
 	        
 	        PrintStream ps = new PrintStream(new File("results/"+repoName+".txt"));
 	        row.create_row(repository_object,ps);
