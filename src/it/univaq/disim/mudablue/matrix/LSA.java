@@ -12,22 +12,25 @@ public class LSA {
 		RealMatrix mFinal = MatrixUtils.createRealMatrix(m.getRowDimension(), m.getColumnDimension());
 		
 		SingularValueDecomposition svd = new SingularValueDecomposition(m);
+		int columnDimension = m.getColumnDimension();
+		m = null; // try per liberare memoria
 		
 		RealMatrix U = svd.getU();
 		RealMatrix S = svd.getS();
 		RealMatrix Vt = svd.getVT();
 		
 		RealMatrix Saux =  MatrixUtils.createRealMatrix(S.getRowDimension(), S.getColumnDimension());
-		RealMatrix Uaux =  MatrixUtils.createRealMatrix(U.getRowDimension(), U.getColumnDimension());
-		RealMatrix Vtaux =  MatrixUtils.createRealMatrix(Vt.getRowDimension(), Vt.getColumnDimension());
+		//RealMatrix Uaux =  MatrixUtils.createRealMatrix(U.getRowDimension(), U.getColumnDimension());
+		//RealMatrix Vtaux =  MatrixUtils.createRealMatrix(Vt.getRowDimension(), Vt.getColumnDimension());
 		
 		
-		int value=m.getColumnDimension()/2;
+		int value=columnDimension/2;
 		//int value = 300;
 		System.out.println(value);
-		if(m.getColumnDimension()<value)
+		
+		if(columnDimension<value)
 		{
-			value = m.getColumnDimension();
+			value = columnDimension;
 		}
 		
 		for(int i=0; i<=value; i = i+1)

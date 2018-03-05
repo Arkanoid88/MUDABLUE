@@ -90,6 +90,7 @@ public class MatrixManager {
 	        repository_object = navigator.Files_List(file, repository_object.getMainList(), terms, repository_object);
 			repository_object.saveMainList(repository_object.getMainList());
 	        
+			System.out.println("saving: "+repoName);
 	        PrintStream ps = new PrintStream(new File("results/"+repoName+".txt"));
 	        row.create_row(repository_object,ps);
 			
