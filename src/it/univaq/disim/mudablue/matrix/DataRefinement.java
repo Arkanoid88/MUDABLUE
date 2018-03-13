@@ -28,7 +28,7 @@ public class DataRefinement {
 			RealVector vector = m.getRowVector(i);
 			for(int j=0; j<m.getRowDimension(); j++)
 			{
-				if(vector.getEntry(j)>0.75 && i!=j)
+				if(vector.getEntry(j)>0.5 && i!=j)
 				{
 					System.out.println(path_list.get(i)+" - "+path_list.get(j)+" : "+vector.getEntry(j));
 				}

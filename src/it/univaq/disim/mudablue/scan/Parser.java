@@ -7,6 +7,8 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 
 public class Parser {
@@ -88,7 +90,10 @@ public class Parser {
         {
         	try
         	{
-        		methods.add(method.getNameAsString());
+				for(MethodCallExpr elem : method.getChildNodesByType(MethodCallExpr.class))
+				{
+						methods.add(elem.getNameAsString());
+				}
         	}
 	    	catch(Exception exc)
 	    	{
