@@ -58,25 +58,36 @@ public class MatrixManager {
 
 		for(String repo : path_list)
 		{		
-			int index = repo.indexOf("\\", 8);
-			String repoName = repo.substring(index+1);;
+			int endindex;
+			/*
+			 * creazione del nome della repo
+			 */
+			int index1 = 0;
+			for(int i=0; i<org.apache.commons.lang3.StringUtils.countMatches(repo.toString(),"\\")-1; i++)
+			{
+				index1 = repo.toString().indexOf("\\",index1+1);
+			}
+			String repoName = repo.toString().substring(index1+1, repo.toString().length());
+			repoName = repoName.replace("\\", "=");
 			
 			File folder_path = new File("results/");
 			File[] listOfFiles = folder_path.listFiles();
 			
 			ArrayList<String> files = new ArrayList<String>();
+			
 			for(File elem:listOfFiles)
 			{
-				int indexx = elem.toString().indexOf("/");
-				String string = elem.toString().substring(indexx+9);
+				int indexx = elem.toString().indexOf("\\");
+				endindex = elem.toString().indexOf(".txt");
+				String string = elem.toString().substring(indexx+1,endindex+4);
 				files.add(string);
 			}
 			
 			/*
-			 * controllo per verificare se ho già analizzato quella repository
+			 * controllo per verificare se ho already analizzato quella repository
 			 */
 			if(files.contains(repoName+".txt")) {
-				//System.out.println("già analizzato");
+				//System.out.println("already analysed");
 				continue;
 			}
 			

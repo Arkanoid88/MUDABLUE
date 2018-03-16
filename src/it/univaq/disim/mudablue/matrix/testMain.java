@@ -19,14 +19,30 @@ public class testMain {
 		MatrixManager manager = new MatrixManager();
 		LSA lsa = new LSA();
 		
+		String path= "C:/repos";
 		
-		File folder_path = new File("C:/repos");
+		File folder_path = new File(path);
 		File[] listOfRepos = folder_path.listFiles();
-		
+		/*
+		 * controllo per gli utenti che hanno multi repository
+		 */
 		for(File elem:listOfRepos)
 		{
-			path_list.add(elem.toString());
+			if(elem.listFiles().length<=1)
+			{
+				String[] subRepo = elem.list();
+				path_list.add(elem+"\\"+subRepo[0]);
+			}
+			else
+			{
+				File[] subListOfRepos = elem.listFiles();
+				for(File subelem:subListOfRepos)
+				{
+					path_list.add(subelem.toString());
+				}
+			}
 		}
+		
 		
 		
 		ArrayList<ArrayList<Double>> occurrencies_list = new ArrayList<ArrayList<Double>>();
@@ -84,7 +100,8 @@ public class testMain {
 		fileWriter.close();
 		
 		DataRefinement dr = new DataRefinement();
-		dr.refine(m);		
+		folder_path = new File("results");
+		dr.refine(m,folder_path);		
 		long estimatedTime = System.currentTimeMillis() - startTime;
 
 		System.out.println(		String.format("%d min, %d sec", 
